@@ -11,6 +11,11 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Image placeholder middleware for any Rack application.}
   spec.license       = "MIT"
+  spec.metadata      = {
+    "changelog_uri"   => "https://github.com/arkency/image_placeholder/releases",
+    "source_code_uri" => "https://github.com/arkency/image_placeholder",
+    "bug_tracker_uri" => "https://github.com/arkency/image_placeholder/issues",
+  }
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
