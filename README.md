@@ -1,6 +1,9 @@
 # ImagePlaceholder
 
-Rack middleware that intercepts not found image requests and replaces them with [placeholders](https://via.placeholder.com/600). Useful for your development data references uploaded images but static files are no longer where they're supposed to be 😅.
+Rack middleware that intercepts not found image requests and replaces them with [placeholders](https://www.hanselman.com/blog/TheInternetsBestPlaceholderImageSitesForWebDevelopment.aspx). Useful for your development data references uploaded images but static files are no longer where they're supposed to be 😅.
+
+[![Build Status](https://travis-ci.org/arkency/image_placeholder.svg?branch=master)](https://travis-ci.org/arkency/image_placeholder)
+[![Gem Version](https://badge.fury.io/rb/image_placeholder.svg)](https://badge.fury.io/rb/image_placeholder)
 
 ## Installation
 
@@ -84,3 +87,9 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/arkenc
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## About
+
+<img src="http://arkency.com/images/arkency.png" alt="Arkency" width="14%" align="left" />
+
+This gem is funded and maintained by [Arkency](http://blog.arkency.com). Check out our other [open-source projects](https://github.com/arkency).
