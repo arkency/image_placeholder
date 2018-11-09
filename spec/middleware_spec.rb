@@ -78,6 +78,7 @@ module ImagePlaceholder
       Rack::Lint.new(
         Middleware.new(
           Rack::File.new(static_path),
+          host: 'via.placeholder.com',
           image_extensions: %w(jpg),
           size_pattern: {
             %r{/uploads/.*/s_[0-9]+\.[a-z]{3}$} => 200,

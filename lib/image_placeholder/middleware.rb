@@ -2,10 +2,11 @@ require 'net/http'
 
 module ImagePlaceholder
   class Middleware
-    def initialize(app, image_extensions: %w(jpg png), size_pattern: {/.*/ => 100})
+    def initialize(app, image_extensions: %w(jpg png), size_pattern: {/.*/ => 100}, host: 'via.placeholder.com')
       @app = app
       @image_extensions = image_extensions
       @size_pattern = size_pattern
+      @host = host
     end
 
     def call(env)
@@ -22,7 +23,7 @@ module ImagePlaceholder
     private
 
     def serve_placeholder_image(size = 100)
-      net_response  = Net::HTTP.get_response(URI("https://via.placeholder.com/#{size}"))
+      net_response  = Net::HTTP.get_response(URI("https://#{@host}/#{size}"))
       rack_response = Rack::Response.new(net_response.body, net_response.code.to_i)
       safe_headers  = net_response.to_hash
                         .reject { |key, _| hop_by_hop_header_fields.include?(key.downcase) }

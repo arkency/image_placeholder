@@ -54,6 +54,23 @@ Rails.application.configure do
 end
 ```
 
+You can even change placeholder image host, if for example you prefer [fillmurray](https://fillmurray.com):
+
+```ruby
+Rails.application.configure do
+  config.middleware.use ImagePlaceholder::Middleware, size_pattern: { /.*/ => '320/320' }, host: 'fillmurray.com'
+end
+```
+
+Last but not least, this middleware can be used with any Rack application:
+
+```ruby
+# config.ru
+use ImagePlaceholder::Middleware, size_pattern: { /.*/ => '320/320' }, host: 'fillmurray.com'
+run YourRackApp
+```
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
