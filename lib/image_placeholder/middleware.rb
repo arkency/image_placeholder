@@ -47,7 +47,7 @@ module ImagePlaceholder
     end
 
     def image?(path)
-      @image_extensions.include? File.extname(path)[1, 3]
+      @image_extensions.any? { |i| File.extname(path).include? i }
     end
 
     def matched_size(path)
