@@ -24,14 +24,17 @@ module ImagePlaceholder
 
     def serve_placeholder_image(size = 100)
       net_response  = Net::HTTP.get_response(URI("https://#{@host}/#{size}"))
-      rack_response = Rack::Response.new(net_response.body, net_response.code.to_i)
       safe_headers  = net_response.to_hash
                         .reject { |key, _| hop_by_hop_header_fields.include?(key.downcase) }
                         .reject { |key, _| key.downcase == 'content-length' }
-
-      safe_headers.each do |key, values|
-        values.each do |value|
-          rack_response.add_header(key, value)
+      if Rack.version < '1.6'
+        rack_response = Rack::Response.new(net_response.body, net_response.code.to_i, safe_headers)
+      else
+        rack_response = Rack::Response.new(net_response.body, net_response.code.to_i)
+        safe_headers.each do |key, values|
+          values.each do |value|
+            rack_response.add_header(key, value)
+          end
         end
       end
       rack_response.finish
@@ -47,7 +50,7 @@ module ImagePlaceholder
     end
 
     def image?(path)
-      @image_extensions.include? File.extname(path)[1, 3]
+      @image_extensions.any? { |i| File.extname(path).include? i }
     end
 
     def matched_size(path)
